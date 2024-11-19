@@ -1,6 +1,6 @@
 local wezterm = require('wezterm')
 local platform = require('utils.platform')
-local backdrops = require('utils.backdrops')
+-- local backdrops = require('utils.backdrops')
 local act = wezterm.action
 
 local mod = {}
@@ -10,24 +10,25 @@ if platform.is_mac then
    mod.SUPER_REV = 'SUPER|CTRL'
 elseif platform.is_win or platform.is_linux then
    mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
-   mod.SUPER_REV = 'ALT|CTRL'
+   mod.SUPER_REV = 'CTRL|SHIFT'
 end
 
 -- stylua: ignore
 local keys = {
    -- misc/useful --
-   { key = 'F1', mods = 'NONE', action = 'ActivateCopyMode' },
-   { key = 'F2', mods = 'NONE', action = act.ActivateCommandPalette },
-   { key = 'F3', mods = 'NONE', action = act.ShowLauncher },
-   { key = 'F4', mods = 'NONE', action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
+   { key = 'F1', mods = 'NONE',       action = 'ActivateCopyMode' },
+   { key = 'p',  mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
+   { key = 'z',  mods = mod.SUPER,    action = act.ShowLauncher },
+   { key = 'x',  mods = mod.SUPER,    action = act.ShowTabNavigator },
+   { key = 'c',  mods = mod.SUPER,    action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
    {
       key = 'F5',
       mods = 'NONE',
       action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }),
    },
-   { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
-   { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
-   { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
+   { key = 'Enter', mods = mod.SUPER, action = act.ToggleFullScreen },
+   { key = 'F12',   mods = 'NONE',    action = act.ShowDebugOverlay },
+   { key = 'f',     mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
    {
       key = 'u',
       mods = mod.SUPER_REV,
@@ -109,51 +110,51 @@ local keys = {
    },
 
    -- background controls --
-   {
-      key = [[/]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:random(window)
-      end),
-   },
-   {
-      key = [[,]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_back(window)
-      end),
-   },
-   {
-      key = [[.]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_forward(window)
-      end),
-   },
-   {
-      key = [[/]],
-      mods = mod.SUPER_REV,
-      action = act.InputSelector({
-         title = 'InputSelector: Select Background',
-         choices = backdrops:choices(),
-         fuzzy = true,
-         fuzzy_description = 'Select Background: ',
-         action = wezterm.action_callback(function(window, _pane, idx)
-            if not idx then
-               return
-            end
-            ---@diagnostic disable-next-line: param-type-mismatch
-            backdrops:set_img(window, tonumber(idx))
-         end),
-      }),
-   },
-   {
-      key = 'b',
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:toggle_focus(window)
-      end)
-   },
+   -- {
+   --    key = [[/]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:random(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[,]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:cycle_back(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[.]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:cycle_forward(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[/]],
+   --    mods = mod.SUPER_REV,
+   --    action = act.InputSelector({
+   --       title = 'InputSelector: Select Background',
+   --       choices = backdrops:choices(),
+   --       fuzzy = true,
+   --       fuzzy_description = 'Select Background: ',
+   --       action = wezterm.action_callback(function(window, _pane, idx)
+   --          if not idx then
+   --             return
+   --          end
+   --          ---@diagnostic disable-next-line: param-type-mismatch
+   --          backdrops:set_img(window, tonumber(idx))
+   --       end),
+   --    }),
+   -- },
+   -- {
+   --    key = 'b',
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:toggle_focus(window)
+   --    end)
+   -- },
 
    -- panes --
    -- panes: split panes
