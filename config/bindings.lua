@@ -26,9 +26,9 @@ local keys = {
       mods = 'NONE',
       action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }),
    },
-   { key = 'Enter', mods = mod.SUPER, action = act.ToggleFullScreen },
-   { key = 'F12',   mods = 'NONE',    action = act.ShowDebugOverlay },
-   { key = 'f',     mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
+   { key = 'F11', mods = 'NONE',        action = act.ToggleFullScreen },
+   { key = 'F12', mods = 'NONE',        action = act.ShowDebugOverlay },
+   { key = 'f',   mods = mod.SUPER_REV, action = act.Search({ CaseInSensitiveString = '' }) },
    {
       key = 'u',
       mods = mod.SUPER_REV,
@@ -50,9 +50,9 @@ local keys = {
    },
 
    -- cursor movement --
-   { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\x1bOH' },
-   { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\x1bOF' },
-   { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\x15' },
+   -- { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\x1bOH' },
+   -- { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\x1bOF' },
+   -- { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\x15' },
 
    -- copy/paste --
    { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') },
@@ -60,8 +60,8 @@ local keys = {
 
    -- tabs --
    -- tabs: spawn+close
-   { key = 't',          mods = mod.SUPER,     action = act.SpawnTab('DefaultDomain') },
-   { key = 't',          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = 'WSL:Ubuntu' }) },
+   { key = 't',          mods = mod.SUPER_REV,     action = act.SpawnTab('DefaultDomain') },
+   -- { key = 't',          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = 'WSL:Ubuntu' }) },
    { key = 'w',          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
 
    -- tabs: navigation
@@ -83,7 +83,7 @@ local keys = {
 
    -- window: zoom window
    {
-      key = '-',
+      key = 'DownArrow',
       mods = mod.SUPER,
       action = wezterm.action_callback(function(window, _pane)
          local dimensions = window:get_dimensions()
@@ -96,7 +96,7 @@ local keys = {
       end)
    },
    {
-      key = '=',
+      key = 'UpArrow',
       mods = mod.SUPER,
       action = wezterm.action_callback(function(window, _pane)
          local dimensions = window:get_dimensions()
@@ -159,12 +159,12 @@ local keys = {
    -- panes --
    -- panes: split panes
    {
-      key = [[\]],
-      mods = mod.SUPER,
+      key = [["]],
+      mods = mod.SUPER_REV,
       action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
    },
    {
-      key = [[\]],
+      key = [[%]],
       mods = mod.SUPER_REV,
       action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
    },
@@ -185,10 +185,10 @@ local keys = {
    },
 
    -- panes: scroll pane
-   { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
-   { key = 'd',        mods = mod.SUPER, action = act.ScrollByLine(5) },
-   { key = 'PageUp',   mods = 'NONE',    action = act.ScrollByPage(-0.75) },
-   { key = 'PageDown', mods = 'NONE',    action = act.ScrollByPage(0.75) },
+   -- { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
+   -- { key = 'd',        mods = mod.SUPER, action = act.ScrollByLine(5) },
+   { key = 'PageUp',   mods = 'NONE', action = act.ScrollByPage(-0.75) },
+   { key = 'PageDown', mods = 'NONE', action = act.ScrollByPage(0.75) },
 
    -- key-tables --
    -- resizes fonts

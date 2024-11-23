@@ -6,10 +6,11 @@ local options = {
 }
 
 if platform.is_win then
-   options.default_prog = { 'powershell', '-NoLogo' }
+   options.default_prog = { 'pwsh', '-NoLogo' }
    options.launch_menu = {
-      { label = 'PowerShell Desktop', args = { 'powershell', '-NoLogo'} },
-      { label = 'Command Prompt', args = { 'cmd' } },
+      { label = 'PowerShell 7', args = { 'pwsh', '-NoLogo' } },
+      { label = 'PowerShell 5.1', args = { 'powershell', '-NoLogo' } },
+      -- { label = 'Command Prompt', args = { 'cmd' } },
       {
          label = 'Git Bash',
          args = { 'C:\\Users\\andy\\scoop\\apps\\git\\current\\bin\\bash.exe' },

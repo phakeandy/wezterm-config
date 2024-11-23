@@ -1,4 +1,4 @@
-local gpu_adapters = require('utils.gpu_adapter')
+-- local gpu_adapters = require('utils.gpu_adapter')
 -- local backdrops = require('utils.backdrops')
 local colors = require('colors.custom')
 local wezterm = require('wezterm')
@@ -15,10 +15,10 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 return {
-   max_fps = 120,
-   front_end = 'WebGpu',
-   webgpu_power_preference = 'HighPerformance',
-   webgpu_preferred_adapter = gpu_adapters:pick_best(),
+   -- max_fps = 120,
+   -- front_end = 'WebGpu',
+   -- webgpu_power_preference = 'HighPerformance',
+   -- webgpu_preferred_adapter = gpu_adapters:pick_best(),
    -- webgpu_preferred_adapter = gpu_adapters:pick_manual('Dx12', 'IntegratedGpu'),
 
    -- cursor
