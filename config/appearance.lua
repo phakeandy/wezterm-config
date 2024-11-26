@@ -3,15 +3,14 @@
 local colors = require('colors.custom')
 local wezterm = require('wezterm')
 
+wezterm.on('gui-startup', function(cmd)
+   local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+   -- 设置初始位置
+   window:gui_window():set_position(120, 100)
 
-	-- 设置初始位置
-	window:gui_window():set_position(120, 100)
-
-	-- 默认窗口最大化
-	-- window:gui_window():maximize()
+   -- 默认窗口最大化
+   -- window:gui_window():maximize()
 end)
 
 return {
@@ -34,7 +33,7 @@ return {
 
    -- background
    -- background = backdrops:create_opts(),
-   window_background_opacity = 1, -- 背景不透明度
+   window_background_opacity = 0.95, -- 背景不透明度
 
    -- scrollbar
    enable_scroll_bar = false,
@@ -57,7 +56,7 @@ return {
    initial_rows = 38,
    initial_cols = 145,
    adjust_window_size_when_changing_font_size = false,
-   window_decorations = "RESIZE",
+   window_decorations = 'RESIZE',
    window_close_confirmation = 'NeverPrompt',
    window_frame = {
       active_titlebar_bg = '#090909',

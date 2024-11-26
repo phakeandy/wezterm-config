@@ -25,12 +25,12 @@ local TITLE_INSET = {
 local M = {}
 
 local RENDER_VARIANTS = {
-   { 'scircle_left', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'title', 'unseen_output', 'padding', 'scircle_right' },
-   { 'scircle_left', 'admin', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'admin', 'title', 'unseen_output', 'padding', 'scircle_right' },
-   { 'scircle_left', 'wsl', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
+   { 'scircle_left', 'title', 'padding',       'scircle_right' },
+   { 'scircle_left', 'title', 'unseen_output', 'padding',       'scircle_right' },
+   { 'scircle_left', 'admin', 'title',         'padding',       'scircle_right' },
+   { 'scircle_left', 'admin', 'title',         'unseen_output', 'padding',      'scircle_right' },
+   { 'scircle_left', 'wsl',   'title',         'padding',       'scircle_right' },
+   { 'scircle_left', 'wsl',   'title',         'unseen_output', 'padding',      'scircle_right' },
 }
 
 ---@type table<string, Cells.SegmentColors>
@@ -44,9 +44,13 @@ local colors = {
    unseen_output_hover   = { bg = '#587D8C', fg = '#FFA066' },
    unseen_output_active  = { bg = '#7FB4CA', fg = '#FFA066' },
 
-   scircle_default       = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#45475A' },
-   scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#587D8C' },
-   scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#7FB4CA' },
+   -- scircle_default       = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#45475A' },
+   -- scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#587D8C' },
+   -- scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#7FB4CA' },
+
+   scircle_default       = { bg = '#171727', fg = '#45475A' },
+   scircle_hover         = { bg = '#171727', fg = '#587D8C' },
+   scircle_active        = { bg = '#171727', fg = '#7FB4CA' },
 }
 
 ---@param proc string
@@ -135,13 +139,13 @@ end
 
 function Tab:create_cells()
    self.cells
-      :add_segment('scircle_left', GLYPH_SCIRCLE_LEFT)
-      :add_segment('admin', ' ' .. GLYPH_ADMIN)
-      :add_segment('wsl', ' ' .. GLYPH_LINUX)
-      :add_segment('title', ' ', nil, attr(attr.intensity('Bold')))
-      :add_segment('unseen_output', ' ' .. GLYPH_CIRCLE)
-      :add_segment('padding', ' ')
-      :add_segment('scircle_right', GLYPH_SCIRCLE_RIGHT)
+       :add_segment('scircle_left', GLYPH_SCIRCLE_LEFT)
+       :add_segment('admin', ' ' .. GLYPH_ADMIN)
+       :add_segment('wsl', ' ' .. GLYPH_LINUX)
+       :add_segment('title', ' ', nil, attr(attr.intensity('Bold')))
+       :add_segment('unseen_output', ' ' .. GLYPH_CIRCLE)
+       :add_segment('padding', ' ')
+       :add_segment('scircle_right', GLYPH_SCIRCLE_RIGHT)
 end
 
 ---@param title string
@@ -162,13 +166,13 @@ function Tab:update_cells(is_active, hover)
 
    self.cells:update_segment_text('title', ' ' .. self.title)
    self.cells
-      :update_segment_colors('scircle_left', colors['scircle_' .. tab_state])
-      :update_segment_colors('admin', colors['text_' .. tab_state])
-      :update_segment_colors('wsl', colors['text_' .. tab_state])
-      :update_segment_colors('title', colors['text_' .. tab_state])
-      :update_segment_colors('unseen_output', colors['unseen_output_' .. tab_state])
-      :update_segment_colors('padding', colors['text_' .. tab_state])
-      :update_segment_colors('scircle_right', colors['scircle_' .. tab_state])
+       :update_segment_colors('scircle_left', colors['scircle_' .. tab_state])
+       :update_segment_colors('admin', colors['text_' .. tab_state])
+       :update_segment_colors('wsl', colors['text_' .. tab_state])
+       :update_segment_colors('title', colors['text_' .. tab_state])
+       :update_segment_colors('unseen_output', colors['unseen_output_' .. tab_state])
+       :update_segment_colors('padding', colors['text_' .. tab_state])
+       :update_segment_colors('scircle_right', colors['scircle_' .. tab_state])
 end
 
 ---@return FormatItem[] (ref: https://wezfurlong.org/wezterm/config/lua/wezterm/format.html)
